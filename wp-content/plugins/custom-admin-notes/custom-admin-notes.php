@@ -15,3 +15,25 @@
     );
 }
 add_action('wp_dashboard_setup', 'can_add_dashboard_widget');
+
+function can_display_dashboard_widget() {
+    // Check if the user has submitted the form.
+    if (isset($_POST['can_admin_note'])) {
+        // Verify nonce for security.
+        check_admin_referer('can_save_admin_note', 'can_admin_note_nonce');
+        
+        // Sanitize and save the note.
+        $note = sanitize_textarea_field($_POST['can_admin_note']);
+        update_option('can_admin_note', $note);
+    }
+
+    // Retrieve the saved note.
+    $note = get_option('can_admin_note', '');
+
+    // Display the form.
+    echo '<form method="post">';
+    wp_nonce_field('can_save_admin_note', 'can_admin_note_nonce');
+    echo '<textarea name="can_admin_note" rows="5" style="width:100%;">' . esc_textarea($note) . '</textarea>';
+    echo '<p><input type="submit" class="button-primary" value="Save Note"></p>';
+    echo '</form>';
+}
