@@ -47,3 +47,9 @@ function can_enqueue_admin_styles($hook) {
 }
 add_action('admin_enqueue_scripts', 'can_enqueue_admin_styles');
 
+// Register settings
+function can_register_settings() {
+    register_setting('can_settings_group', 'can_widget_title');
+    register_setting('can_settings_group', 'can_widget_visibility');
+}
+add_action('admin_init', 'can_register_settings');
