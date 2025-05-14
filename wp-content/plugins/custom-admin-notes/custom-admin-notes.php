@@ -109,3 +109,8 @@ function can_render_settings_page() {
 __('Custom Admin Notes', 'custom-admin-notes');
 _e('Save Note', 'custom-admin-notes');
 
+// Load domain text
+function can_load_textdomain() {
+    load_plugin_textdomain('custom-admin-notes', false, dirname(plugin_basename(__FILE__)) . '/languages');
+}
+add_action('plugins_loaded', 'can_load_textdomain');
