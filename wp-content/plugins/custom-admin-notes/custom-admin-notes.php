@@ -38,6 +38,7 @@ function can_display_dashboard_widget() {
     echo '</form>';
 }
 
+// Enqueue admin styles
 function can_enqueue_admin_styles($hook) {
     // Only enqueue on the dashboard page.
     if ($hook !== 'index.php') {
