@@ -67,3 +67,33 @@ function can_add_settings_page() {
 }
 add_action('admin_menu', 'can_add_settings_page');
 
+// Renders settings page
+function can_render_settings_page() {
+    ?>
+    <div class="wrap">
+        <h1>Custom Admin Notes Settings</h1>
+        <form method="post" action="options.php">
+            <?php
+            settings_fields('can_settings_group');
+            do_settings_sections('can_settings_group');
+            ?>
+            <table class="form-table">
+                <tr valign="top">
+                    <th scope="row">Widget Title</th>
+                    <td><input type="text" name="can_widget_title" value="<?php echo esc_attr(get_option('can_widget_title', 'Custom Admin Notes')); ?>" /></td>
+                </tr>
+                <tr valign="top">
+                    <th scope="row">Widget Visibility</th>
+                    <td>
+                        <select name="can_widget_visibility">
+                            <option value="all" <?php selected(get_option('can_widget_visibility'), 'all'); ?>>All Admins</option>
+                            <option value="super_admin" <?php selected(get_option('can_widget_visibility'), 'super_admin'); ?>>Super Admin Only</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <?php submit_button(); ?>
+        </form>
+    </div>
+    <?php
+}
