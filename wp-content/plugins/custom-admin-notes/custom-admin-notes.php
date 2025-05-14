@@ -104,3 +104,8 @@ function can_render_settings_page() {
     </div>
     <?php
 }
+
+// Internationalization support
+__('Custom Admin Notes', 'custom-admin-notes');
+_e('Save Note', 'custom-admin-notes');
+
