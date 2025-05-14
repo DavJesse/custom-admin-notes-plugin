@@ -54,3 +54,16 @@ function can_register_settings() {
     register_setting('can_settings_group', 'can_widget_visibility');
 }
 add_action('admin_init', 'can_register_settings');
+
+// Adds settings page
+function can_add_settings_page() {
+    add_options_page(
+        'Custom Admin Notes Settings',
+        'Admin Notes',
+        'manage_options',
+        'custom-admin-notes-settings',
+        'can_render_settings_page'
+    );
+}
+add_action('admin_menu', 'can_add_settings_page');
+
