@@ -37,3 +37,13 @@ function can_display_dashboard_widget() {
     echo '<p><input type="submit" class="button-primary" value="Save Note"></p>';
     echo '</form>';
 }
+
+function can_enqueue_admin_styles($hook) {
+    // Only enqueue on the dashboard page.
+    if ($hook !== 'index.php') {
+        return;
+    }
+    wp_enqueue_style('can_admin_styles', plugin_dir_url(__FILE__) . 'css/admin-style.css');
+}
+add_action('admin_enqueue_scripts', 'can_enqueue_admin_styles');
+
