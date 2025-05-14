@@ -8,9 +8,16 @@
  */
 
  function can_add_dashboard_widget() {
+    $visibility = get_option('can_widget_visibility', 'all');
+    if ($visibility === 'super_admin' && !is_super_admin()) {
+        return;
+    }
+
+    $title = get_option('can_widget_title', 'Custom Admin Notes');
+
     wp_add_dashboard_widget(
         'custom_admin_notes_widget',          // Widget slug.
-        'Custom Admin Notes',                 // Title.
+        $title,                               // Title.
         'can_display_dashboard_widget'        // Display function.
     );
 }
